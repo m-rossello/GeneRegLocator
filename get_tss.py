@@ -100,24 +100,25 @@ tss_list = []  # Initialize a list to store TSS information
 
 # Iterate over each line in the input GFF file
 for line in args.input_file:
-    columns = line.split('\t')  # Split the line into columns using tab delimiter
-
-    if columns[2] == "gene":  # Check if the entry is a gene
+    if not line.startswith("#"):
+        columns = line.split('\t')  # Split the line into columns using tab delimiter
     
-        # Modify the entry to represent a TSS
-        columns[2] = "TSS"
-        start = columns[3]
-        end = columns[4]
-        strand = columns[6]
-
-        # Adjust start and end positions based on strand
-        if strand == "+":  # For positive strand genes
-            columns[4] = int(start) + 1  # Set TSS position
-            tss_list.append(columns)  # Add TSS entry to the list
-
-        elif strand == "-":  # For negative strand genes
-            columns[3] = int(end) - 1  # Set TSS position
-            tss_list.append(columns)  # Add TSS entry to the list
+        if columns[2] == "gene":  # Check if the entry is a gene
+        
+            # Modify the entry to represent a TSS
+            columns[2] = "TSS"
+            start = columns[3]
+            end = columns[4]
+            strand = columns[6]
+    
+            # Adjust start and end positions based on strand
+            if strand == "+":  # For positive strand genes
+                columns[4] = int(start) + 1  # Set TSS position
+                tss_list.append(columns)  # Add TSS entry to the list
+    
+            elif strand == "-":  # For negative strand genes
+                columns[3] = int(end) - 1  # Set TSS position
+                tss_list.append(columns)  # Add TSS entry to the list
 
 # Convert TSS list to BED format
 bed_file = convert_to_bed(tss_list)
