@@ -30,7 +30,7 @@ This script utilizes input files detailing TSS, genes, and peaks in BED format, 
 
 Usage:
 ```bash
-python cisreg_map.py -t your_tss_file.bed -g your_genes_file.bed -p your_peaks_file.bed -l your_length_file.txt -o your_output_file.txt
+python cisreg_map.py -t your_tss_file.bed -g your_genes_file.bed -p your_peaks_file.bed -l your_length_file.txt -o your_output_file_prefix
 ```
 ## Contact
 For more information or support, please contact Maria Rossello at [mariarossello@ub.edu](mailto:mariarossello@ub.edu).
